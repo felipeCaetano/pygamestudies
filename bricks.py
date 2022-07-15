@@ -2,6 +2,7 @@ import os
 import sys
 
 import pygame
+from pygame.rect import Rect
 
 pygame.init()
 
@@ -28,11 +29,24 @@ bx, by = (0, ball_startY)
 sx, sy = (ball_speed, ball_speed)
 ball_rect.topleft = bx, by
 # brick init
+brick = pygame.image.load('brick.png')
+bricks = []
+for y in range(5):
+    brickY = (y * 24) + 100
+    for x in range(10):
+        brickX = (x * 31) + 245
+        width = brick.get_width()
+        height = brick.get_height()
+        rect = Rect(brickX, brickY, width, height)
+        bricks.append(rect)
+
 
 while True:
     screen.fill(BLACK)
 
     # brick draw
+    for b in bricks:
+        screen.blit(brick, b)
     # bat and ball draw
     screen.blit(bat, bat_rect)
     screen.blit(ball, ball_rect)
